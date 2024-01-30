@@ -1,0 +1,30 @@
+.user-table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+    width: 100%;
+    height: auto;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+
+    thead tr {
+        background-color: #FEC89A;
+    }
+    th, td {
+        padding: 10px 12px;
+        border-right: 1px solid;
+    }
+    tbody tr {
+        border-bottom: 1px solid #FFB5A7;
+        text-align: center;
+    }
+    tbody tr:nth-of-type(even) {
+        background-color: #F9DCC4;
+    }
+    tbody tr:nth-of-type(odd) {
+        background-color: #F8EDEB;
+    }
+    tbody tr:last-of-type {
+        border-bottom: 2px solid #FEC89A;
+    }
+}
