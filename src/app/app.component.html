@@ -4,15 +4,17 @@
 
 <div id="user-toolbar">
     <div>
-        <button
-        [ngClass]="{'tri-state-button': true, 'no-state': true}"
-        (click)="handleUserSelection()"
-        >
-            {{ buttonStateContent }}
-        </button>
-        {{ getSelectedUsers() }}
+      <button [ngClass]="{
+        'tri-state-button': true,
+        'no-state': true
+      }"
+      (click)="handleUserSelection()">
+    {{ buttonStateContent }} </button>
     </div>
-</div>
+    <div>
+      {{ getSelectedUsers() }} / {{ users.length }}
+    </div>
+  </div>
 
 <ul>
     <ng-container *ngFor="let user of users">

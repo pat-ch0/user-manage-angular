@@ -59,6 +59,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleUserSelection(user: UserType & IsSelectedType): void {
     user.isSelected = !user.isSelected
+    
+    if (this.getListState() === 0) {
+      this.buttonStateContent = 'x'
+      this.buttonState = 1
+    } else {
+      this.buttonState = 0
+      this.buttonStateContent = '-'
+    }
   }
 
   removeUser(user: UserType): void {
@@ -66,19 +74,26 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   handleUserSelection(): void {
-    console.log("start", this.buttonState)
     if (this.buttonState === 0 || this.buttonState === 1) {
       this.users.map((user) => {
+        //return {... user, isSelected: this.buttonState === 0 ? true : false}
         user.isSelected = this.buttonState === 0 ? true : false
         return user
       })
-      this.buttonState = this.buttonState === 0 ? 1 : 0
+      this.buttonState = this.buttonState === 0 ? 1 : 2
       this.buttonStateContent = this.buttonState === 1 ? 'x' : ''
-      console.log("fin", this.buttonState)
     }
   }
 
   public getSelectedUsers(): number {
     return this.users.filter((user) => user.isSelected).length
+  }
+
+  private getListState(): number {
+    if (this.users.length === this.users.filter((user) => user.isSelected).length) {
+      return 0
+    }
+
+    return -1
   }
 }
