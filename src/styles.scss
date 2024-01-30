@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Colors
+$main-color: #edede9;
+$second-color: #d6ccc2;
+$third-color: #f5ebe0;
+$fourth-color: #e3d5ca;
+$fifth-color: #d5bdaf;
+
+// Names colors
+$--primary: $fifth-color;
+$--secondary: $second-color;
+$--light: $main-color;
+$--warn: $third-color;
+$--danger: darken($fourth-color, 15%);
+
+body {
+    margin: 0;
+    padding: 0;
+}

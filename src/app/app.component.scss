@@ -1,0 +1,22 @@
+div {
+    &.app {
+        height: 100vh;
+
+        app-header, app-footer {
+            position: sticky;
+            display: block;
+            height: 2em;
+            width: auto;
+        }
+        app-header {
+            top: 0;
+        }
+        app-footer {
+            bottom: 0;
+        }
+
+        main {
+            height: 85vh;
+        }
+    }
+}
