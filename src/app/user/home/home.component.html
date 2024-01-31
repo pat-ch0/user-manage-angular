@@ -3,18 +3,18 @@
         <thead>
             <tr>
                 <th>Checkbox</th>
-                <th>Id</th>
-                <th>Firstname</th>
                 <th (click)="sort('lastname')">Lastname</th>
+                <th>Firstname</th>
+                <th>Id</th>
                 <th (click)="sort('role')">Role id</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
                 <td><input type="checkbox" name="user-check"></td>
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.id }}</td>
                 <td>{{ user.role_id }}</td>
             </tr>
         </tbody>
