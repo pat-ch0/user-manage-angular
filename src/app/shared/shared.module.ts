@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './ui/header/header.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UiModule } from '../ui/ui.module';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [
     HeaderComponent,
     FooterComponent,
-    HttpClientModule
+    HttpClientModule,
+    UiModule,
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
