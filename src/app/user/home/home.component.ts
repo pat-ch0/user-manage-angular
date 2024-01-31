@@ -42,6 +42,8 @@ export class HomeComponent {
     const sorter = this.sorters.get(onColumn)
     if (sorter) {
       this.users.sort(sorter.getSorter())
+      return
     }
+    throw new TypeError(`No candidate found for ${onColumn}`)
   }
 }
