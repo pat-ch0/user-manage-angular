@@ -15,15 +15,8 @@ export class UserService {
   }
 
   add(user: any): Observable<HttpResponse<any>> {
-    const userType = {
-      id: null,
-      lastname: user.lastname,
-      firstname: user.firstname,
-      birthdate: user.birthdate,
-      role_id: user.role_id
-    }
     return this.httpClient.post(
-      `${environment.userApiRoot}users`, userType, {observe: 'response'}
+      `${environment.userApiRoot}users`, user, {observe: 'response'}
       )
   }
 
