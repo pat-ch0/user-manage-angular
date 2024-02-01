@@ -4,6 +4,7 @@ import { UserService } from '../services/user/user.service';
 import { take } from 'rxjs';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { HttpResponse } from '@angular/common/http';
 
 interface RoleIds {
   value: number;
@@ -55,6 +56,7 @@ export class UpdateComponent {
     })
 
     this.form = this._formBuilder.group({
+      id: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       firstname: [],
       birthdate: ['', [Validators.required]],
@@ -63,6 +65,13 @@ export class UpdateComponent {
   }
 
   onSubmit(): void {
-
+    this.service.update(this.form.value).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log(`Got ${response.status} : ${JSON.stringify(response.body)}`)
+      },
+      error: (error) => {
+        // Deal with error
+      }
+    })
   }
 }

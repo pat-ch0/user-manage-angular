@@ -1,17 +1,18 @@
 <h1>Update a user</h1>
 
-<div class="form-group">
-    <mat-form-field>
-        <mat-label>User to update</mat-label>
-        <mat-select required>
-          @for (user of users; track user) {
-            <mat-option [value]="user.firstname">{{user.firstname}} {{user.lastname}}</mat-option>
-          }
-        </mat-select>
-    </mat-form-field>
-</div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>User to update</mat-label>
+            <mat-select formControlName="id" required>
+              @for (user of users; track user) {
+                <mat-option [value]="user.id">{{user.firstname}} {{user.lastname}}</mat-option>
+              }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
     <div class="form-group">
         <mat-form-field>
             <input matInput formControlName="lastname" placeholder="User new lastname*">

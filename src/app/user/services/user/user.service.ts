@@ -20,6 +20,12 @@ export class UserService {
       )
   }
 
+  update(user: any): Observable<HttpResponse<any>> {
+    return this.httpClient.put(
+      `${environment.userApiRoot}users`, user, {observe: 'response'}
+    )
+  }
+
   // parseDate is useless since we use a Date input
   private _parseDate(strDate: Date): Date {
     const parts = strDate.toString().split('/')
