@@ -5,12 +5,14 @@ import { UserRoutingModule } from './user-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddComponent } from './add/add.component';
+import { UpdateComponent } from './update/update.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    AddComponent
+    AddComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,61 @@
+<h1>Update a user</h1>
+
+<div class="form-group">
+    <mat-form-field>
+        <mat-label>User to update</mat-label>
+        <mat-select required>
+          @for (user of users; track user) {
+            <mat-option [value]="user.firstname">{{user.firstname}} {{user.lastname}}</mat-option>
+          }
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <mat-form-field>
+            <input matInput formControlName="lastname" placeholder="User new lastname*">
+            <mat-error *ngIf="c['lastname'].touched && c['lastname'].errors">
+                Lastname is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-form-field>
+            <input matInput formControlName="firstname" placeholder="User new firstname">
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Choose a new birthdate</mat-label>
+            <input matInput formControlName="birthdate" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year" [startAt]="startDate" disabled="false"></mat-datepicker>
+            <mat-error *ngIf="c['birthdate'].touched && c['birthdate'].errors">
+                Valid birthdate is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>New role id</mat-label>
+            <mat-select formControlName="role_id" required>
+              @for (roleId of roleIds; track roleId) {
+                <mat-option [value]="roleId.value">{{roleId.value}}</mat-option>
+              }
+            </mat-select>
+            <mat-error *ngIf="c['role_id'].touched && c['role_id'].errors">
+                Valid role id is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">Update</button>
+    </div>
+    {{form.value | json}}
+</form>
