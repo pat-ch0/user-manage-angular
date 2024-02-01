@@ -3,7 +3,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <mat-form-field>
-            <input matInput formControlName="lastname" placeholder="User lastname">
+            <input matInput formControlName="lastname" placeholder="User lastname*">
             <mat-error *ngIf="c['lastname'].touched && c['lastname'].errors">
                 Lastname is required so it cannot be empty
             </mat-error>
@@ -18,23 +18,33 @@
 
     <div class="form-group">
         <mat-form-field>
-            <input matInput formControlName="birthdate" placeholder="User birthdate">
+            <mat-label>Choose a birthdate</mat-label>
+            <input matInput formControlName="birthdate" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+            <mat-hint>MM/DD//YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year" [startAt]="startDate" disabled="false"></mat-datepicker>
             <mat-error *ngIf="c['birthdate'].touched && c['birthdate'].errors">
-                Birthdate is required so it cannot be empty
+                Valid birthdate is required
             </mat-error>
         </mat-form-field>
     </div>
 
     <div class="form-group">
         <mat-form-field>
-            <input matInput formControlName="role_id" placeholder="User role id">
-            <mat-error *ngIf="c['role_id'].touched && c['role_id'].errors">
-                Role id is required so it cannot be empty
-            </mat-error>
+            <mat-label>Role id</mat-label>
+            <mat-select formControlName="role_id" required>
+              @for (roleId of roleIds; track roleId) {
+                <mat-option [value]="roleId.value">{{roleId.value}}</mat-option>
+              }
+            </mat-select>
+            @if (roleControl.hasError('required')) {
+                <mat-error>Please select a role id</mat-error>
+            }
         </mat-form-field>
     </div>
 
     <div class="form-group">
         <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
     </div>
+    {{form.value | json}}
 </form>

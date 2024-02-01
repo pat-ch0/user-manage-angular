@@ -8,7 +8,6 @@ import { UserType } from '../../../types/user-type';
   providedIn: 'root'
 })
 export class UserService {
-
   constructor(private httpClient: HttpClient) { }
 
   findAll(): Observable<Array<UserType>> {
@@ -20,7 +19,7 @@ export class UserService {
       id: null,
       lastname: user.lastname,
       firstname: user.firstname,
-      birthdate: this._parseDate(user.birthdate),
+      birthdate: user.birthdate,
       role_id: user.role_id
     }
     return this.httpClient.post(
@@ -28,8 +27,9 @@ export class UserService {
       )
   }
 
-  private _parseDate(strDate: string): Date {
-    const parts = strDate.split('-')
+  // parseDate is useless since we use a Date input
+  private _parseDate(strDate: Date): Date {
+    const parts = strDate.toString().split('/')
     return new Date (
       +parts[0], (+(parts[1]) - 1), +parts[2]
     )
