@@ -19,6 +19,9 @@ export class HomeComponent {
     ['role', new RoleUserSorter]
   ])
 
+  public mainCheckboxState: boolean = false
+  public checkboxesState: boolean[] = []
+
   constructor(private service: UserService) {}
 
   ngOnInit(): void {
@@ -28,6 +31,8 @@ export class HomeComponent {
         next: (users: Array<UserType>) => {
           // Your logic goes here
           this.users = users
+
+          this.checkboxesState = this.users.map(() => false)
         },
         error: (error) => {
           // Deal with error
@@ -45,5 +50,21 @@ export class HomeComponent {
       return
     }
     throw new TypeError(`No candidate found for ${onColumn}`)
+  }
+
+  // Check if all the checkboxes are checked
+  allCheckboxesChecked() {
+    return this.checkboxesState.every(state => state)
+  }
+
+  toggleMainCheckbox(): void {
+    this.mainCheckboxState = !this.mainCheckboxState
+    this.checkboxesState.fill(this.mainCheckboxState)
+  }
+
+  // toggle main checkbox if you toggle a checkbox in the list
+  toggleCheckbox(index: number) {
+    this.checkboxesState[index] = !this.checkboxesState[index]
+    this.mainCheckboxState = this.allCheckboxesChecked()
   }
 }

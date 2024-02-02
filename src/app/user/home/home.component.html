@@ -2,7 +2,7 @@
     <table class="user-table">
         <thead>
             <tr>
-                <th>Checkbox</th>
+                <th>Delete <input type="checkbox" [checked]="mainCheckboxState" (change)="toggleMainCheckbox()"></th>
                 <th (click)="sort('lastname')">Lastname</th>
                 <th>Firstname</th>
                 <th>Id</th>
@@ -10,8 +10,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users">
-                <td><input type="checkbox" name="user-check"></td>
+            <tr *ngFor="let user of users; let i = index">
+                <td><input type="checkbox" name="user-check" [checked]="checkboxesState[i]" (change)="toggleCheckbox(i)"></td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.id }}</td>
