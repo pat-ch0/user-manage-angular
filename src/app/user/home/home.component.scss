@@ -33,3 +33,10 @@ a {
     display: flex;
     flex-direction: column;
 }
+
+#deleteButton {
+    background-color: #ff0000;
+    border: none;
+    float: right;
+    margin-right: 1em;
+}

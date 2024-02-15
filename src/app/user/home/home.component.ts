@@ -5,6 +5,7 @@ import { UserType } from '../../types/user-type';
 import { UserSorter } from '../_helpers/user-sorter';
 import { LastnameUserSorter } from '../_helpers/lastname-user-sorter';
 import { RoleUserSorter } from '../_helpers/role-user-sorter';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { RoleUserSorter } from '../_helpers/role-user-sorter';
 })
 export class HomeComponent {
   public users: Array<UserType> = []
+  private usersToDelete: Array<UserType> = []
   
   private sorters: Map<string, UserSorter> = new Map([
     ['lastname', new LastnameUserSorter()],
@@ -60,11 +62,38 @@ export class HomeComponent {
   toggleMainCheckbox(): void {
     this.mainCheckboxState = !this.mainCheckboxState
     this.checkboxesState.fill(this.mainCheckboxState)
+    // Delete all users or delete none
+    if (this.mainCheckboxState) {
+      for (let user in this.users) {
+        this.usersToDelete[user] = this.users[user]
+      }
+    }
+    else {
+      this.usersToDelete = []
+    }
   }
 
   // toggle main checkbox if you toggle a checkbox in the list
   toggleCheckbox(index: number) {
     this.checkboxesState[index] = !this.checkboxesState[index]
     this.mainCheckboxState = this.allCheckboxesChecked()
+    // Delete user if checkbox is checked
+    if (this.checkboxesState[index]) {
+      this.usersToDelete[index] = this.users[index]
+    }
+    else {
+      this.usersToDelete.splice(index, 1)
+    }
+  }
+
+  onDelete(): void {
+    this.service.delete(this.usersToDelete).subscribe({
+      next: (response: HttpResponse<any>) => {
+        console.log(`Got ${response.status} : ${JSON.stringify(response.body)}`)
+      },
+      error: (error) => {
+        // Deal with error
+      }
+    })
   }
 }
